@@ -1,0 +1,201 @@
+const serviceRouterY = [
+	{
+		path: `/aams/AccountConfiguration`,
+		name: "accountConfiguration",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "自有账户配置管理",
+		},
+		component: () => import("@/views/AccountConfiguration/index.vue"),
+	},
+	{
+		path: `/aams/ProfitAndLoss`,
+		name: "ProfitAndLoss",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "损益情况报表",
+		},
+		component: () => import("@/views/ProfitAndLoss/index.vue"),
+	},
+	{
+		path: `/aams/AccountCashFlow`,
+		name: "AccountCashFlow",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "账户现金流预测",
+		},
+		component: () => import("@/views/AccountCashFlow/index.vue"),
+	},
+	{
+		path: `/aams/TeamAssets`,
+		name: "TeamAssets",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "团队资产时序查询",
+		},
+		component: () => import("@/views/TeamAssets/index.vue"),
+	},
+	{
+		path: `/aams/DetailAssets`,
+		name: "DetailAssets",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "明细资产时序查询",
+		},
+		component: () => import("@/views/DetailAssets/index.vue"),
+	},
+	{
+		path: `/aams/AssetsAllDepart`,
+		name: "AssetsAllDepart",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "资产配置部管理流动性资产统计表",
+		},
+		component: () => import("@/views/AssetsAllDepart/index.vue"),
+	},
+	{
+		path: `/aams/CombinationChange`,
+		name: "CombinationChange",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "组合结构变动表",
+		},
+		component: () => import("@/views/CombinationChange/index.vue"),
+	},
+	{
+		path: `/aams/ManagementCaliber`,
+		name: "ManagementCaliber",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "管理口径资产分类与收益率统计表",
+		},
+		component: () => import("@/views/ManagementCaliber/index.vue"),
+	},
+	{
+		path: `/aams/ActualClassification`,
+		name: "ActualClassification",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "实际资产分类与收益率统计表",
+		},
+		component: () => import("@/views/ActualClassification/index.vue"),
+	},
+	{
+		path: `/aams/FixedList`,
+		name: "FixedList",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "固定类组合一览表",
+		},
+		component: () => import("@/views/FixedList/index.vue"),
+	},
+	{
+		path: `/aams/FixedRevenList`,
+		name: "FixedRevenList",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "固定类组合持仓收益表",
+		},
+		component: () => import("@/views/FixedRevenList/index.vue"),
+	},
+	{
+		path: `/aams/FixedPortList`,
+		name: "FixedPortList",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "固定类组合交易分析表",
+		},
+		component: () => import("@/views/FixedPortList/index.vue"),
+	},
+	{
+		path: `/aams/FinancingPro`,
+		name: "FinancingPro",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "融资组合",
+		},
+		component: () => import("@/views/FinancingPro/index.vue"),
+	},
+	{
+		path: `/aams/PledgedBonds`,
+		name: "PledgedBonds",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "质押券统计表",
+		},
+		component: () => import("@/views/PledgedBonds/index.vue"),
+	},
+	{
+		path: `/aams/DataPacket`,
+		name: "DataPacket",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "瑞众人寿报表数据包",
+		},
+		component: () => import("@/views/DataPacket/index.vue"),
+	},
+	{
+		path: `/aams/WeeklyReport`,
+		name: "WeeklyReport",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "资产配置部周报",
+		},
+		component: () => import("@/views/WeeklyReport/index.vue"),
+	},
+	{
+		path: `/aams/CashFlow`,
+		name: "CashFlow",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "有效现金流表",
+		},
+		component: () => import("@/views/CashFlow/index.vue"),
+	},
+	{
+		path: `/aams/VariousAsset`,
+		name: "VariousAsset",
+		meta: {
+			token: false,
+			showRouter: false,
+			keepAlive: false,
+			title: "各类资产配置额度监控表",
+		},
+		component: () => import("@/views/VariousAsset/index.vue"),
+	},
+];
+export default serviceRouterY;

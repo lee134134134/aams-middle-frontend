@@ -1,0 +1,109 @@
+:deep(.el-form-item__label) {
+  // padding-right: 0;
+  font-size: 14px;
+  font-weight: normal;
+  font-weight: 400;
+  color: #3a3a3a;
+  line-height: 32px;
+  height: 32px;
+  // text-align: left;
+}
+
+:deep(.el-form-item__content .el-input) {
+  width: 240px;
+  height: 32px;
+  margin-right: 28px;
+}
+:deep(.el-form-item) {
+  margin-bottom: 16px;
+}
+
+:deep(.el-form .el-select) {
+  width: 240px;
+  margin-right: 28px;
+}
+
+:deep(.el-form .el-select__wrapper) {
+  height: 32px;
+}
+
+:deep(.el-date-editor) {
+  width: 240px;
+  height: 32px;
+  margin-right: 28px;
+}
+
+:deep(.el-button) {
+  font-size: 14px;
+  height: 32px;
+}
+
+:deep(.el-date-editor .el-range-input) {
+  font-size: 14px;
+}
+
+.el-table .el-table__body tr:hover {
+  background-color: #f2f8ff;
+}
+
+:deep(.el-pagination.is-background .el-pager li.is-active) {
+  background-color: #3071c3 !important;
+}
+
+:deep(.el-button .el-icon) {
+  width: 20px;
+  height: 20px;
+}
+
+:deep(.el-button .el-icon svg) {
+  width: 30px;
+  height: 30px;
+}
+
+:deep(.el-button.hover-color:hover) {
+  background: #468adf;
+}
+
+:deep(.el-card.is-never-shadow) {
+  border: none;
+}
+.el-button + .el-button {
+  margin-left: 14px;
+}
+
+:deep(.el-pagination .is-active) {
+  background-color: rgba(41, 100, 175, 1) !important;
+  color: #fff !important;
+}
+
+:deep(.el-pagination .el-select) {
+  width: 110px;
+}
+
+:deep(.el-pagination .el-select__wrapper) {
+  width: 110px;
+}
+
+:deep(.el-pagination *) {
+  font-size: 14px;
+}
+
+:deep(.el-pagination .btn-prev) {
+  margin-left: 30px !important;
+}
+
+:deep(.el-pagination__sizes, .el-pagination__total) {
+  margin-left: 30px;
+}
+
+:deep(.el-pagination__jump) {
+  margin-left: 30px;
+}
+:deep(.el-table__body) {
+  color: #2a2a2a;
+}
+
+:deep(.el-button .el-icon) {
+  width: 14px;
+  height: 14px;
+}

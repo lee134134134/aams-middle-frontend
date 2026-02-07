@@ -1,0 +1,112 @@
+import axios from "axios";
+import {
+	ElMessage,
+	ElLoading
+} from "element-plus";
+import VueCookies from "vue-cookies";
+import userStore from "@/stores/modules/user.js";
+
+window.$cookies = VueCookies;
+import {
+	errorHandle
+} from "./config";
+let loadingInstance;
+const NODE_ENV =
+	import.meta.env.VITE_APP_NODE_ENV;
+const URL =
+	import.meta.env.VITE_APP_HTTP_DOMAIN;
+
+const baseURL = NODE_ENV == "local" ? "/aams-business" : URL;
+// const baseURL = NODE_ENV == "local" ? "/" : URL;
+// 配置环境
+const options = {
+	baseURL: baseURL
+};
+
+// axios.defaults.timeout = 6000;
+
+const instance = axios.create(options);
+
+// 添加请求拦截器
+instance.interceptors.request.use(
+	async (config) => {
+			let userName = userStore().userName;
+			let userId = sessionStorage.getItem("userId");
+			const token = $cookies.get("portal_token");
+			if (!userName) {
+				await userStore().getUserInfo(); //获取用户信息
+				userName = sessionStorage.getItem("userName");
+				userId = sessionStorage.getItem("userId");
+			}
+			Object.assign(config.headers, {
+				Authorization: "Bearer " + token,
+				userName,
+				userId
+			});
+
+			return config;
+		},
+		(error) => {
+			// ElLoading.service().close(); // 关闭loading
+			console.log("请求拦截error", error);
+			return Promise.reject(error);
+		}
+);
+
+// http response 拦截器
+instance.interceptors.response.use(
+	(res) => {
+		// ElLoading.service().close();
+		errorHandle(res?.data?.code);
+		if (res?.data?.code !== '00000' && res.data !== "" && res.data
+			.code !== "0") {
+			ElMessage({
+				dangerouslyUseHTMLString: true,
+				plain: true,
+				duration: 0,
+				showClose: true,
+				message: res.data?.msg || `${res.data?.code} 失败`,
+				type: "error",
+				icon: "WarningFilled",
+				customClass: 'danger-msg-error'
+			});
+			requestAnimationFrame(() => {
+				setTimeout(() => {
+					adjustMessageScrollbar()
+				}, 0);
+			})
+
+		} else if (res.data == "") {
+			ElMessage({
+				message: "error: data为空",
+				type: "error",
+			});
+			return;
+		}
+		return res.data;
+	},
+	(error) => {
+		// ElLoading.service().close();
+		ElMessage({
+
+			message: `${error} `,
+			type: "error",
+		});
+		return Promise.reject(error);
+	}
+);
+function adjustMessageScrollbar() {
+	console.log(document.querySelectorAll('.danger-msg-error .el-message__content'))
+	document.querySelectorAll('.danger-msg-error .el-message__content').forEach(el => {
+		const needScroll = el.scrollHeight > el.clientHeight + 5
+		if (needScroll) {
+			el.style.overflowY = 'auto'
+			el.setAttribute('data-needs-scroll', 'true')
+		} else {
+			el.style.overflowY = 'hidden'
+			el.setAttribute('data-needs-scroll', 'false')
+		}
+	})
+}
+
+export default instance;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="77px" height="25px" viewBox="0 0 77 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-177.000000, -79.000000)">
+            <g id="编组" transform="translate(177.000000, 79.000000)">
+                <rect id="矩形" stroke="#07BE8F" stroke-width="1.5" fill="#FFFFFF" opacity="0.7" x="0.75" y="0.75" width="75.5" height="23.5" rx="3"></rect>
+                <text id="内部路演" font-family="PingFangSC-Regular, PingFang SC" font-size="13" font-weight="normal" fill="#07BE8F">
+                    <tspan x="13" y="17">内部路演</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
