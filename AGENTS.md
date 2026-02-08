@@ -105,10 +105,13 @@ src/
 │   ├── base/            # 基础 UI 组件
 │   └── business/        # 业务特定组件
 ├── directive/           # 自定义 Vue 指令
+├── composables/         # Vue Composables
+├── constants/           # 常量定义
 ├── hooks/               # Composition API 钩子
 ├── router/              # Vue Router 配置
 ├── stores/              # Pinia 状态管理
 ├── style/               # 全局样式和主题
+├── types/              # TypeScript 类型定义
 ├── utils/               # 工具函数
 └── views/               # 按功能组织的页面组件
     ├── ComPosition/     # 投资组合管理
