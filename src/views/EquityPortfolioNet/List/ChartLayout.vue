@@ -153,14 +153,14 @@ const getOption = (title: string, dates: Array<unknown>, portfolioReturn: Array<
           blockIconInactive: { width: 12, height: 4, backgroundColor: "#ccc", verticalAlign: "middle" },
         },
       },
-      data: [{ name: "累计超额收益率（规模加权）" }, { name: "组合累计收益率（规模加权）" }, { name: "基准累计收益率" }, { name: "累计回撤序列（规模加权）" }],
+      data: [{ name: "组合累计收益率（规模加权）" }, { name: "基准累计收益率" }, { name: "累计超额收益率（规模加权）" }, { name: "累计回撤序列（规模加权）" }],
     },
   ],
   grid: {
-   left: '50', // 左边的宽度
-   right: '50', // 右边的宽度
+    left: "50", // 左边的宽度
+    right: "50", // 右边的宽度
     top: "18%",
-    bottom: "10%",
+    bottom: "16%",
     containLabel: false,
   },
   xAxis: {
@@ -192,15 +192,6 @@ const getOption = (title: string, dates: Array<unknown>, portfolioReturn: Array<
   ],
   series: [
     {
-      name: "累计超额收益率（规模加权）",
-      type: "line",
-      symbol: "none",
-      areaStyle: { color: "#f2ba00", opacity: 1 },
-      lineStyle: { width: 0 },
-      data: excessReturn,
-      yAxisIndex: 0,
-    },
-    {
       name: "组合累计收益率（规模加权）",
       type: "line",
       symbol: "none",
@@ -214,6 +205,15 @@ const getOption = (title: string, dates: Array<unknown>, portfolioReturn: Array<
       symbol: "none",
       lineStyle: { color: "#ef7000", width: 2 },
       data: benchmarkReturn,
+      yAxisIndex: 0,
+    },
+    {
+      name: "累计超额收益率（规模加权）",
+      type: "line",
+      symbol: "none",
+      areaStyle: { color: "#f2ba00", opacity: 1 },
+      lineStyle: { width: 0 },
+      data: excessReturn,
       yAxisIndex: 0,
     },
     {

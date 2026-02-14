@@ -125,12 +125,12 @@
 
 	<!-- 新增 -->
 	<el-dialog v-model="AddEdit" append-to-body custom-class="custom-newsContent" header-class="cuntom-header"
-		width="1150" style="border-radius: 12px;padding-right:30px;" center destroy-on-close
+		width="1150" style="border-radius: 12px;padding:32px;" center destroy-on-close
 		:close-on-click-modal="false" :close-on-press-escape="false" :show-close="false">
 		<template #header>
 			<div style="display: flex; align-items: center;justify-content: space-between;">
 				<div style="display: flex; align-items: center;">
-					<div style="width: 4px;height: 20px;background-color: #2173F7;"></div>
+					<div style="width: 4px;height: 20px;background-color: #2173F7;border-radius: 3px;"></div>
 					<span style="font-weight: 500;font-size: 20px; margin-left: 9px;">{{ title }}</span>
 				</div>
 				<div style="cursor: pointer;" @click="AddEdit=false">
@@ -276,12 +276,12 @@
 		</template>
 	</el-dialog>
 	<el-dialog v-model="MessageDialog" append-to-body custom-class="custom-newsContent" header-class="cuntom-header"
-		width="1150" style="border-radius: 12px;" center destroy-on-close :close-on-click-modal="false"
+		width="1150" style="border-radius: 12px;padding:32px;" center destroy-on-close :close-on-click-modal="false"
 		:close-on-press-escape="false" :show-close="false">
 		<template #header>
 			<div style="display: flex; align-items: center;justify-content: space-between;">
 				<div style="display: flex; align-items: center;">
-					<div style="width: 4px;height: 20px;background-color: #2173F7;"></div>
+					<div style="width: 4px;height: 20px;background-color: #2173F7;border-radius: 3px;"></div>
 					<span style="font-weight: 500;font-size: 20px; margin-left: 9px;">{{ title }}</span>
 				</div>
 				<div style="cursor: pointer;" @click="MessageDialog=false">
@@ -391,12 +391,12 @@
 	</el-dialog>
 	<!-- 非标 -->
 	<el-dialog v-model="FbMessageDialog" append-to-body custom-class="custom-newsContent" header-class="cuntom-header"
-		width="1150" style="border-radius: 12px;" center destroy-on-close :close-on-click-modal="false"
+		width="1150" style="border-radius: 12px;padding:32px;" center destroy-on-close :close-on-click-modal="false"
 		:close-on-press-escape="false" :show-close="false">
 		<template #header>
 			<div style="display: flex; align-items: center;justify-content: space-between;">
 				<div style="display: flex; align-items: center;">
-					<div style="width: 4px;height: 20px;background-color: #2173F7;"></div>
+					<div style="width: 4px;height: 20px;background-color: #2173F7;border-radius: 3px;"></div>
 					<span style="font-weight: 500;font-size: 20px; margin-left: 9px;">{{ title }}</span>
 				</div>
 				<div style="cursor: pointer;" @click="FbMessageDialog=false">
@@ -405,7 +405,7 @@
 			</div>
 		</template>
 		<el-table empty-text="暂无数据" v-loading="isFBLoading" :data="fbgetContentList1" stripe border
-			style="width: 100%;overflow:visible;margin:20px 0px;" ref="tableRefFb" :header-cell-style="{
+			style="width: 100%;overflow:visible;margin:10px 0px;" ref="tableRefFb" :header-cell-style="{
 		  background: '#E4EFFF',
 		  color: '#333333',
 		  height: '38px',
@@ -449,7 +449,7 @@
 			background popper-class="select_bottom" data-track-id="AccountCashFlow-paginationFb-btn"
 			data-track-name="上下账维护-非标分页" />
 		<template #footer>
-			<div class="dialog-footer" style="margin:20px 0 10px 0;">
+			<div class="dialog-footer" style="margin:20px 0 0px 0;">
 				<el-button @click="addFb" type="primary" class="button-custom color-button"
 					data-track-id="AccountMaintenace-addFb-btn" data-track-name="上下账维护-非标保存"
 					:loading="SearchLoadingFb">保存</el-button>
@@ -736,6 +736,7 @@
 		if (newvalue === false) {
 			fbpageSize1.value = 10;
 			fbpageNo1.value = 1;
+			selectedRowsFb.value = [];
 		}
 	})
 	const tableRefFb = ref<TableInstance>();

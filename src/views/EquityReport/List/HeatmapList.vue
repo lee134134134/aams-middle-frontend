@@ -2,43 +2,18 @@
   <div class="header">
     <el-row :gutter="20" align="middle">
       <el-col :span="4">
-        <el-tree-select
-          v-model="formInline.investManagerList"
-          :data="formattedTreeData"
-          :props="treeProps"
-          multiple
-          filterable
-          clearable
-          collapse-tags
-          collapse-tags-tooltip
-          show-checkbox
-          node-key="value"
-          popper-class="heatmap-tree-popper" 
-          placeholder="请选择投资经理"
-          class="heatmap-select"
-          style="width: 100%"
-          :filter-method="handleFilterMethod"
-          @blur="blurSelect"
-          @focus="recordOldValue"
-          @visible-change="handleVisibleChange"
-        >
+        <el-tree-select v-model="formInline.investManagerList" :data="formattedTreeData" :props="treeProps" multiple filterable clearable collapse-tags collapse-tags-tooltip show-checkbox node-key="value" popper-class="heatmap-tree-popper" placeholder="请选择投资经理" class="heatmap-select" style="width: 100%" :filter-method="handleFilterMethod" @blur="blurSelect" @focus="recordOldValue" @visible-change="handleVisibleChange">
           <template #header>
             <div class="select-all-header">
-              <el-checkbox
-                v-model="isAllSelected"
-                :indeterminate="isIndeterminate"
-                @change="handleSelectAll"
-              >
-                全选{{ filterText ? '(筛选结果)' : '' }}
-              </el-checkbox>
+              <el-checkbox v-model="isAllSelected" :indeterminate="isIndeterminate" @change="handleSelectAll"> 全选{{ filterText ? "(筛选结果)" : "" }} </el-checkbox>
             </div>
           </template>
         </el-tree-select>
       </el-col>
-      
+
       <el-col :span="6" class="info-wrapper">
         <span class="text">查询的交易日天数需大于1</span>
-        
+
         <el-tooltip placement="bottom" effect="light" popper-class="color-scale-popper">
           <template #content>
             <div class="color-scale-legend">
@@ -58,26 +33,10 @@
   </div>
 
   <section v-if="tableData?.length > 0">
-    <el-table
-      v-loading="tableLoading"
-      :cell-style="handleCellStyle"
-      :data="tableData"
-      :header-cell-style="handleHeaderCellStyle"
-      border
-      class="table-container"
-      max-height="700"
-      style="width: 100%"
-    >
+    <el-table v-loading="tableLoading" :cell-style="handleCellStyle" :data="tableData" :header-cell-style="handleHeaderCellStyle" border class="table-container" max-height="700" style="width: 100%">
       <el-table-column align="left" fixed label="" prop="rowName" width="148" />
-      
-      <el-table-column 
-        v-for="col in tableColumns" 
-        :key="col.name" 
-        :label="col.name" 
-        :prop="col.name" 
-        align="center"
-        min-width="122"
-      >
+
+      <el-table-column v-for="col in tableColumns" :key="col.name" :label="col.name" :prop="col.name" align="center" min-width="122">
         <template #default="scope">
           {{ scope.row[col.name] }}
         </template>
@@ -162,22 +121,22 @@ const previousValue = ref<string[]>([])
 const filterText = ref("")
 const emit = defineEmits<{ (e: "updateList", value: string[]): void }>()
 
-const treeProps = { label: 'label', children: 'children' }
+const treeProps = { label: "label", children: "children" }
 
 const colorScaleList = [
-  { color: '#ffffff', label: 'x = 1' },
-  { color: '#E94641', label: '0.95 ≤ x < 1' },
-  { color: '#EF7471', label: '0.9 ≤ x < 0.95' },
-  { color: '#F7BAB8', label: '0.85 ≤ x < 0.9' },
-  { color: '#FAD1D0', label: '0.8 ≤ x < 0.85' },
-  { color: '#FFA65E', label: '0.75 ≤ x < 0.8' },
-  { color: '#FFCA9E', label: '0.5 ≤ x < 0.75' },
-  { color: '#FFDBBF', label: '0 ≤ x < 0.5' },
-  { color: '#F2F2F2', label: 'x = 0' },
-  { color: '#ECFAEE', label: '-0.5 < x < 0' },
-  { color: '#C5F0CD', label: '-0.75 < x ≤ -0.5' },
-  { color: '#8BE29B', label: '-1 < x ≤ -0.75' },
-  { color: '#3DCE58', label: 'x = -1' },
+  { color: "#ffffff", label: "x = 1" },
+  { color: "#E94641", label: "0.95 ≤ x < 1" },
+  { color: "#EF7471", label: "0.9 ≤ x < 0.95" },
+  { color: "#F7BAB8", label: "0.85 ≤ x < 0.9" },
+  { color: "#FAD1D0", label: "0.8 ≤ x < 0.85" },
+  { color: "#FFA65E", label: "0.75 ≤ x < 0.8" },
+  { color: "#FFCA9E", label: "0.5 ≤ x < 0.75" },
+  { color: "#FFDBBF", label: "0 ≤ x < 0.5" },
+  { color: "#F2F2F2", label: "x = 0" },
+  { color: "#ECFAEE", label: "-0.5 < x < 0" },
+  { color: "#C5F0CD", label: "-0.75 < x ≤ -0.5" },
+  { color: "#8BE29B", label: "-1 < x ≤ -0.75" },
+  { color: "#3DCE58", label: "x = -1" },
 ]
 
 // --- 树形选择逻辑 ---
@@ -195,10 +154,14 @@ const formatTreeData = (data: InvestManagerItem[]): TreeSelectNode[] => {
   })
   return result
 }
-const formattedTreeData = computed(() => formatTreeData(headData?.value?.list || []))
+const formattedTreeData = computed(() => formatTreeData(headData?.list || []))
 
-const handleFilterMethod = (val: string) => { filterText.value = val }
-const handleVisibleChange = (visible: boolean) => { if (!visible) filterText.value = "" }
+const handleFilterMethod = (val: string) => {
+  filterText.value = val
+}
+const handleVisibleChange = (visible: boolean) => {
+  if (!visible) filterText.value = ""
+}
 
 const getVisibleLeafValues = (nodes: TreeSelectNode[]): string[] => {
   let ids: string[] = []
@@ -219,7 +182,7 @@ const isAllSelected = computed({
     const visibleIds = currentVisibleLeafValues.value
     return visibleIds.length > 0 && visibleIds.every(id => formInline.investManagerList.includes(id))
   },
-  set: () => { }
+  set: () => {},
 })
 const isIndeterminate = computed(() => {
   const visibleIds = currentVisibleLeafValues.value
@@ -241,26 +204,26 @@ const handleSelectAll = (val: boolean | string | number) => {
 const getHeaderLevelStyle = (level: number): CSSProperties => {
   const style: CSSProperties = {}
   // 对齐逻辑
-  if (level === 0) style.textAlign = 'left'
-  else if (level === 1) style.textAlign = 'center'
-  else if (level === 2) style.textAlign = 'center'
-  
+  if (level === 0) style.textAlign = "left"
+  else if (level === 1) style.textAlign = "center"
+  else if (level === 2) style.textAlign = "center"
+
   // 字体逻辑：level=2 变细，其余加粗
-  style.fontWeight = level === 2 ? 'normal' : 'bold'
-  
+  style.fontWeight = level === 2 ? "normal" : "bold"
+
   return style
 }
 
 /** 2. 第一列样式逻辑：全左对齐，1右移20px，2右移40px；且 level=2 时字体变细 */
 const getFirstColumnLevelStyle = (level: number): CSSProperties => {
-  const style: CSSProperties = { textAlign: 'left' }
+  const style: CSSProperties = { textAlign: "left" }
   // 位移逻辑
-  if (level === 1) style.paddingLeft = '20px !important'
-  else if (level === 2) style.paddingLeft = '40px !important'
-  
+  if (level === 1) style.paddingLeft = "20px !important"
+  else if (level === 2) style.paddingLeft = "40px !important"
+
   // 字体逻辑：level=2 变细，其余加粗
-  style.fontWeight = level === 2 ? 'normal' : 'bold'
-  
+  style.fontWeight = level === 2 ? "normal" : "bold"
+
   return style
 }
 
@@ -268,34 +231,34 @@ const tableData = ref<HeatmapRow[]>([])
 const tableColumns = ref<InvestManagerHeader[]>([])
 
 watch(
-  () => headData?.value?.tableList,
-  (newVal) => {
+  () => headData?.tableList,
+  newVal => {
     if (newVal) {
       const headers = newVal.selectInvestManagerList || []
       const matrix = newVal.selectHeatMapDataList || []
       tableColumns.value = headers
       tableData.value = headers.map((rowHeader, i) => {
         const rowObj: HeatmapRow = { rowName: rowHeader.name, rowLevel: rowHeader.level }
-        headers.forEach((colHeader) => {
+        headers.forEach(colHeader => {
           rowObj[colHeader.name] = matrix[i] ? matrix[i][headers.indexOf(colHeader)] : null
         })
         return rowObj
       })
     }
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 )
 
 const handleHeaderCellStyle = ({ column }: HeaderCellStyleParams): CSSProperties => {
   const colMeta = tableColumns.value.find(c => c.name === column.property)
   const baseStyle: CSSProperties = {
-    background: '#E4EFFF',
-    color: '#333333',
-    height: '48px !important',
-    borderRight: '1px solid #ddd'
+    background: "#E4EFFF",
+    color: "#333333",
+    height: "48px !important",
+    borderRight: "1px solid #ddd",
     // 注意：这里移除了之前判断 isSelected 的 fontWeight 逻辑
   }
-  return Object.assign(baseStyle, colMeta ? getHeaderLevelStyle(colMeta.level) : { textAlign: 'left', fontWeight: 'bold' })
+  return Object.assign(baseStyle, colMeta ? getHeaderLevelStyle(colMeta.level) : { textAlign: "left", fontWeight: "bold" })
 }
 
 const handleCellStyle = ({ row, column, columnIndex }: CellStyleParams): CSSProperties => {
@@ -309,7 +272,7 @@ const handleCellStyle = ({ row, column, columnIndex }: CellStyleParams): CSSProp
   // 热力图数据列处理
   const val = row[column.property]
   if (val === null || val === undefined) return {}
-  
+
   let backgroundColor = ""
   const newVal = Number(val)
   if (newVal === 1) backgroundColor = `#fff`
@@ -326,7 +289,7 @@ const handleCellStyle = ({ row, column, columnIndex }: CellStyleParams): CSSProp
   else if (-1 < newVal && newVal <= -0.75) backgroundColor = `#8be29b`
   else if (newVal === -1) backgroundColor = `#3dce58`
 
-  return { backgroundColor, color: "#666", transition: "all 0.3s", textAlign: 'center' }
+  return { backgroundColor, color: "#666", transition: "all 0.3s", textAlign: "center" }
 }
 
 const blurSelect = (): void => {
@@ -337,8 +300,12 @@ const blurSelect = (): void => {
     previousValue.value = [...currentValue]
   }
 }
-const recordOldValue = (): void => { previousValue.value = [...formInline.investManagerList] }
-const resetSelect = (): void => { formInline.investManagerList = [] }
+const recordOldValue = (): void => {
+  previousValue.value = [...formInline.investManagerList]
+}
+const resetSelect = (): void => {
+  formInline.investManagerList = []
+}
 
 defineExpose({ resetSelect })
 </script>
@@ -346,7 +313,10 @@ defineExpose({ resetSelect })
 <style lang="scss">
 .heatmap-tree-popper {
   .el-tree-node__content {
-    > .el-icon:last-child, .el-tree-node__suffix { display: none !important; }
+    > .el-icon:last-child,
+    .el-tree-node__suffix {
+      display: none !important;
+    }
   }
 }
 </style>
@@ -356,38 +326,90 @@ defineExpose({ resetSelect })
   margin-top: 32px;
   margin-bottom: 12px;
   width: 100%;
-  .heatmap-select { max-width: 300px; }
+  .heatmap-select {
+    max-width: 300px;
+  }
   .select-all-header {
-    padding: 0 12px; height: 32px;
-    border-bottom: 1px solid #f0f0f0; background-color: #fff;
-    display: flex; align-items: center;
+    padding: 0 12px;
+    height: 32px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
   }
   .info-wrapper {
-    display: flex; align-items: center; gap: 16px; white-space: nowrap;
-    .text { font-size: 14px; color: #666; }
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+    .text {
+      font-size: 14px;
+      color: #666;
+    }
     .legend-trigger {
-      display: flex; align-items: center; gap: 4px; cursor: pointer; color: #409eff;
-      .legend-text { font-size: 14px; user-select: none; }
-      .info-icon { font-size: 18px; }
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      color: #409eff;
+      .legend-text {
+        font-size: 14px;
+        user-select: none;
+      }
+      .info-icon {
+        font-size: 18px;
+      }
     }
   }
 }
 .color-scale-legend {
   padding: 8px 4px;
   .legend-item {
-    display: flex; align-items: center; margin-bottom: 6px;
-    &:last-child { margin-bottom: 0; }
-    .color-box { width: 18px; height: 18px; border: 1px solid #eee; margin-right: 12px; border-radius: 2px; flex-shrink: 0; }
-    .color-text { font-size: 13px; color: #333; min-width: 100px; }
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .color-box {
+      width: 18px;
+      height: 18px;
+      border: 1px solid #eee;
+      margin-right: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .color-text {
+      font-size: 13px;
+      color: #333;
+      min-width: 100px;
+    }
   }
 }
 .table-container {
-  :deep(td.el-table__cell) { height: 40px !important; }
+  :deep(td.el-table__cell) {
+    height: 40px !important;
+  }
   :deep(.el-table__row td.el-table__cell:hover) {
     outline: 2px solid #409eff !important;
-    outline-offset: -2px; z-index: 1;
+    outline-offset: -2px;
+    z-index: 1;
   }
 }
-:deep(.el-table__fixed-column--left) { background-color: #fff !important; font-weight: inherit; }
-.empty-table { border: 1px solid #dfdfdf; padding: 40px 0; & > div { font-size: 14px; color: #999; padding-bottom: 20px; } }
+:deep(.el-table__fixed-column--left) {
+  background-color: #fff !important;
+  font-weight: inherit;
+}
+.empty-table {
+  border: 1px solid #dfdfdf;
+  padding: 40px 0;
+  & > div {
+    font-size: 14px;
+    color: #999;
+    padding-bottom: 20px;
+  }
+}
+:global(.el-select-dropdown.is-multiple .el-select-dropdown__item.is-selected:after) {
+  display: none;
+}
 </style>

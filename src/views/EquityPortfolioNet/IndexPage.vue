@@ -127,6 +127,7 @@ const formInline = reactive({
   sobCodeListLabel: [],
   startDate: "",
   endDate: "",
+  endTempDate: "",
   currencyUnit: "0",
 })
 const props = {
@@ -195,6 +196,7 @@ const getCaldDateTime = async (): Promise<void> => {
   if (res && res.code == "00000") {
     formInline.startDate = res.data.startDate || ""
     formInline.endDate = res.data.endDate || ""
+    formInline.endTempDate = formInline.endDate
     resetList.startDate = formInline.startDate
     resetList.endDate = formInline.endDate
   }
@@ -204,9 +206,16 @@ const dateVal = (date: Date | string | number): number => {
   return Date.parse(new Date(date).toString())
 }
 const disabledDateEnd = (time: Date): boolean => {
-  if (formInline.startDate) {
-    return time.getTime() < dateVal(formInline.startDate)
+  const targetTime = time.getTime()
+  const startTime = formInline.startDate ? dateVal(formInline.startDate) : null
+  const endLimitTime = formInline.endTempDate ? dateVal(formInline.endTempDate) : null
+  if (startTime && targetTime < startTime) {
+    return true
   }
+  if(endLimitTime && targetTime > endLimitTime) {
+    return true
+  }
+  return false
 }
 const disabledDateStart = (time: Date): boolean => {
   //注意这要加一个判断不然没选结束时间的时候开始时间也全部不能选择

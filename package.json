@@ -10,6 +10,7 @@
     "build:prod": "vite build --mode prod",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit",
     "prepare": "husky",
     "lint": "eslint src --ext .vue,.ts"
   },

@@ -11,7 +11,7 @@
             </el-col>
             <el-col :span="6">
               <el-form-item class="margin-12" label="查询日期" prop="queryDate" style="width: 100%">
-                <el-date-picker v-model="formInline.queryDate" :clearable="false" :editable="false" class="custom-checkDate" placeholder="请选择查询日期" popper-class="custom-datePicker" type="date" value-format="YYYY-MM-DD"></el-date-picker>
+                <el-date-picker v-model="formInline.queryDate" :clearable="false" :disabled-date="disabledDateEnd" :editable="false" class="custom-checkDate" placeholder="请选择查询日期" popper-class="custom-datePicker" type="date" value-format="YYYY-MM-DD"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :span="6">
@@ -81,6 +81,7 @@ const formInline = reactive({
   insuranceType: [],
   investManagerList: [],
   queryDate: "",
+  endTempDate: "",
   currencyUnit: "1",
 })
 let resetList = reactive({
@@ -116,6 +117,7 @@ const getCaldDateTime = async (): Promise<void> => {
   const res = await getCaldDate({ ...obj })
   if (res && res.code == "00000") {
     formInline.queryDate = res.data
+    formInline.endTempDate = formInline.queryDate
     resetList.queryDate = res.data
   }
 }
@@ -265,6 +267,18 @@ const detailData = async (formEl: FormInstance | undefined): void => {
         })
     }
   })
+}
+// 开始结束时间限制
+const dateVal = (date: any) => {
+  return Date.parse(new Date(date) as any)
+}
+const disabledDateEnd = (time: any) => {
+  const targetTime = time.getTime()
+  const endLimitTime = formInline.endTempDate ? dateVal(formInline.endTempDate) : null
+  if (endLimitTime && targetTime > endLimitTime) {
+    return true
+  }
+  return false
 }
 </script>
 
